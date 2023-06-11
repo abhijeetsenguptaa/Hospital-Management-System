@@ -2,6 +2,7 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { UserModel } = require('../models/user.model');
+const { query } = require('express');
 
 
 
@@ -120,6 +121,62 @@ module.exports = {
             res.status(500).send({
                 status: false,
                 msg: "Error in adding the information."
+            })
+        }
+    },
+
+
+    // Fetching all the available doctors
+    fetchingStaffs: async (req, res) => {
+        try {
+            const specialization = req.query.specialization;
+            const position = req.query.position;
+            const gender = req.query.gender;
+            const role = req.query.role;
+            if (specialization && gender && position && role) {
+                const doctors = await UserModel.find({ specialization, gender, position, role });
+                res.status(200).send({
+                    status: true,
+                    data: doctors
+                })
+            }
+            else if (!specialization && !gender && !position && !role) {
+                const doctors = await UserModel.find({ position: "Doctor" });
+                res.status(200).send({
+                    status: true,
+                    data: doctors
+                })
+            }
+            else {
+                let query = {};
+                query.$and = [];
+
+                if (specialization) {
+                    query.$and.push({ specialization });
+                }
+
+                if (gender) {
+                    query.$and.push({ gender });
+                }
+
+                if (position) {
+                    query.$and.push({ position });
+                }
+
+                if (role) {
+                    query.$and.push({ role });
+                }
+
+                const doctors = await UserModel.find(query);
+                res.status(200).send({
+                    status: true,
+                    data: doctors
+                })
+            }
+        } catch {
+            res.status(500).send({
+                status: false,
+                data: "Error im fetching the information of Doctors."
             })
         }
     }

@@ -1,5 +1,5 @@
 const express = require('express');
-const { registeringNewUser, loggingUser, resetPassword, staffAdditionDetail } = require('../controllers/user.controller');
+const { registeringNewUser, loggingUser, resetPassword, staffAdditionDetail, fetchingStaffs } = require('../controllers/user.controller');
 const { passwordValidator } = require('../middleware/passwordValidator.middleware');
 const { authentication } = require('../middleware/authentication.middleware');
 
@@ -7,6 +7,7 @@ const { authentication } = require('../middleware/authentication.middleware');
 
 const userRoute = express.Router();
 
+userRoute.get('/', fetchingStaffs);
 
 userRoute.post('/register', passwordValidator, registeringNewUser);
 
