@@ -7,25 +7,35 @@ module.exports = {
         password: String,
         role: {
             type: String,
-            enum: ['Patient', 'Doctor', 'Staff', 'Admin'],
+            enum: ['Patient', 'Staff', 'Admin'],
         },
-        gender: String,
+        gender: {
+            type: String,
+            enum: ['Male', 'Female', 'Transgender']
+        },
         dateOfBirth: Date,
         contactInformation: String,
         address: String,
-        medicalHistory: String,
-        insuranceInformation: String,
+        medicalHistory: [String],
+        insuranceInformation: {
+            type: String,
+            enum: ["Yes", "No"],
+            default: "No"
+        },
         specialization: {
             type: String,
             enum: ['Cardiology', 'Dermatology', 'Endocrinology', 'Gastroenterology', 'Neurology', 'Oncology', 'Pediatrics', 'Psychiatry', 'Surgery', 'Urology']
         },
         position: {
             type: String,
-            enum: ['Nurse', 'Receptionist', 'Janitor', 'Pharmacist', 'Lab Technician', 'Administrative Staff', 'IT Support', 'Security Guard']
+            enum: ['Doctor', 'Nurse', 'Receptionist', 'Janitor', 'Pharmacist', 'Lab Technician', 'Administrative Staff', 'IT Support', 'Security Guard']
         },
         workingHours: String,
         salary: Number,
-        department: String,
+        department: {
+            type: String,
+            enum: ['Cardiology', 'Dermatology', 'Endocrinology', 'Gastroenterology', 'Neurology', 'Oncology', 'Pediatrics', 'Psychiatry', 'Surgery', 'Urology']
+        },
     }, {
         versionKey: false
     }))

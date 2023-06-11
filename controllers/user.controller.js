@@ -9,7 +9,7 @@ module.exports = {
     // User-Registration
     registeringNewUser: async (req, res) => {
         try {
-            const { name, email, password, role } = req.body;
+            const { name, email, password, role, gender, dateOfBirth, contactInformation, address } = req.body;
             const searchUser = await UserModel.find({ email });
             if (searchUser.length >= 1) {
                 res.status(409).send({
@@ -19,7 +19,7 @@ module.exports = {
             } else {
                 bcrypt.hash(password, 6, async (err, hash) => {
                     if (hash) {
-                        const user = new UserModel({ name, email, password: hash, role });
+                        const user = new UserModel({ name, email, password: hash, role, gender, dateOfBirth, contactInformation, address });
                         await user.save();
                         res.status(200).send({
                             status: true,
@@ -101,6 +101,25 @@ module.exports = {
             res.status(500).send({
                 status: false,
                 msg: "Error in Updating the Password!"
+            })
+        }
+    },
+
+
+    // Staff's Addition Details
+    staffAdditionDetail: async (req, res) => {
+        try {
+            const data = req.body;
+            await UserModel.findByIdAndUpdate({ _id: user }, data)
+            res.status(200).send({
+                status: true,
+                msg: "All the information have been saved.",
+                data: await UserModel.find({ role: "Staff" })
+            })
+        } catch {
+            res.status(500).send({
+                status: false,
+                msg: "Error in adding the information."
             })
         }
     }
