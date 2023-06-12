@@ -3,7 +3,10 @@ This repository contains API documentation for Hospital-Management-System
 
 1. **Overview Basic API endpoint Deployed**
    ```
-   https://social-media-app-s8zz.onrender.com/api
+   {
+    live : ,
+    localCheck : http://localhost:8080/
+   }
    ```
 
 - For running the server locally
@@ -19,17 +22,18 @@ This repository contains API documentation for Hospital-Management-System
   ```
 ---
 
-2. **Authorization :**This API uses Role based Authorization.
+2. **Authorization :** 
+   This API uses Role based Authorization.
    - In order to perform user any crud in app, Token is required.
    - Token can be obtained by creating account and logging into the system.
    - No separate login routes for users and admins.
 ---
 
-3. ## **User Registration**
-   **URL:** `/register`
-   **Method:** `POST`
+3. **User Registration**
+   **URL :** `/register`\
+   **Method :** `POST`
 
-   **Description**
+   **Description :**
    This endpoint is used to register a new user.
 
    **Parameters**
@@ -54,13 +58,13 @@ This repository contains API documentation for Hospital-Management-System
 
    **Response**
    - 201 (Conflict):
-    - Body: {"msg":"User's email-id already exists."}
-    - Description: Indicates that the provided email address already exists in the system, and registration     cannot  proceed.
+     - Body: {"msg":"User's email-id already exists."}
+     - Description: Indicates that the provided email address already exists in the system, and registration     cannot  proceed.
 
    - 200 (OK):
-    - Body: {"msg":"User registered successfully."}
-    - Description: Indicates that the user registration was successful.
+     - Body: {"msg":"User registered successfully."}
+     - Description: Indicates that the user registration was successful.
 
    - 500 (Internal Server Error):
-    - Body: {"msg":"Error in registration of the new User."}
-    - Description: Indicates that an error occurred during the registration process.
+     - Body: {"msg":"Error in registration of the new User."}
+     - Description: Indicates that an error occurred during the registration process.
