@@ -10,7 +10,7 @@ module.exports = {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users'
         },
-        date: Date,
+        date: String,
         time: {
             type: String,
             enum: ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM',]

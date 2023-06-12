@@ -13,7 +13,7 @@ module.exports = {
             type: String,
             enum: ['Male', 'Female', 'Transgender']
         },
-        dateOfBirth: Date,
+        dateOfBirth: String,
         contactInformation: String,
         address: String,
         medicalHistory: [String],
