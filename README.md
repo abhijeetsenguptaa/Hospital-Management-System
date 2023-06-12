@@ -22,19 +22,17 @@ This repository contains API documentation for Hospital-Management-System
   ```
 ---
 
-2. **Authorization :** 
-   This API uses Role based Authorization.
+2. **Authorization :** This API uses Role based Authorization.
    - In order to perform user any crud in app, Token is required.
    - Token can be obtained by creating account and logging into the system.
    - No separate login routes for users and admins.
 ---
 
-3. **User Registration**
+3. **User Registration**\
    **URL :** `/register`\
    **Method :** `POST`
 
-   **Description :**
-   This endpoint is used to register a new user.
+   **Description :** This endpoint is used to register a new user.
 
    **Parameters**
    ```
@@ -44,7 +42,7 @@ This repository contains API documentation for Hospital-Management-System
     password: String,
     role: {
         type: String,
-        enum: ['Patient', 'Staff', 'Admin'],
+        enum: ['Patient', 'Staff'],
     },
     gender: {
         type: String,
@@ -68,3 +66,34 @@ This repository contains API documentation for Hospital-Management-System
    - 500 (Internal Server Error):
      - Body: {"msg":"Error in registration of the new User."}
      - Description: Indicates that an error occurred during the registration process.
+---
+
+4. **User-Login**\
+   **URL :** `/login`\
+   **Method :** `POST`
+
+   **Description :** This endpoint is used for user login.
+
+   **Parameters**
+   ```
+   {
+    email: String,
+    password: String,
+   }
+   ```
+
+   **Response**
+   - 200 (OK):
+     - Body: {"msg": "Login Successful", "token": <user_token>}
+     - Description: Indicates that the login was successful. The response includes a user token for authentication.
+
+   - 404 (Not found):
+     - Body: {"msg": "User not found."}
+     - Description: Indicates that the user with the provided email does not exist.
+
+   - 500 (Internal Server Error):
+     - Body: {"msg": "Wrong Credentials"}
+     - Description: Indicates that the provided credentials (email and password) are incorrect.
+---
+
+5. 
