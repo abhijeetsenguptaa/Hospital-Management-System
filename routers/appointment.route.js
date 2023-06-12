@@ -1,5 +1,5 @@
 const express = require('express');
-const { bookingAppointment, changingStatus, deletingAppointment } = require('../controllers/appointment.controller');
+const { bookingAppointment, changingStatus, deletingAppointment, fetchingAppointment } = require('../controllers/appointment.controller');
 const { authentication } = require('../middleware/authentication.middleware');
 
 
@@ -13,7 +13,7 @@ appointmentRoute.patch('/update/:id', authentication, changingStatus);
 
 appointmentRoute.delete('/:id', authentication, deletingAppointment);
 
-
+appointmentRoute.get('/', authentication, fetchingAppointment);
 
 
 
