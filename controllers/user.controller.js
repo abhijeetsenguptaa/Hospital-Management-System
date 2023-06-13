@@ -133,7 +133,15 @@ module.exports = {
             const position = req.query.position;
             const gender = req.query.gender;
             const role = req.query.role;
-            if (specialization && gender && position && role) {
+            const id = req.query.id;
+            if (id) {
+                const doctors = await UserModel.find({ _id: id });
+                res.status(200).send({
+                    status: true,
+                    data: doctors
+                })
+            }
+            else if (specialization && gender && position && role) {
                 const doctors = await UserModel.find({ specialization, gender, position, role });
                 res.status(200).send({
                     status: true,
@@ -141,10 +149,10 @@ module.exports = {
                 })
             }
             else if (!specialization && !gender && !position && !role) {
-                const doctors = await UserModel.find({ position: "Doctor" });
+                const allMembers = await UserModel.find();
                 res.status(200).send({
                     status: true,
-                    data: doctors
+                    data: allMembers
                 })
             }
             else {
@@ -167,10 +175,10 @@ module.exports = {
                     query.$and.push({ role });
                 }
 
-                const doctors = await UserModel.find(query);
+                const members = await UserModel.find(query);
                 res.status(200).send({
                     status: true,
-                    data: doctors
+                    data: members
                 })
             }
         } catch {

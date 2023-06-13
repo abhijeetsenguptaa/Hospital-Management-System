@@ -1,7 +1,7 @@
 # API documentation Hospital-Management-System
 This repository contains API documentation for Hospital-Management-System
 
-1. **Overview Basic API endpoint Deployed**
+### Overview Basic API endpoint Deployed
    ```
    {
     live : ,
@@ -22,14 +22,15 @@ This repository contains API documentation for Hospital-Management-System
   ```
 ---
 
-2. **Authorization :** This API uses Role based Authorization.
+### Authorization :
+This API uses Role based Authorization.
    - In order to perform user any crud in app, Token is required.
    - Token can be obtained by creating account and logging into the system.
    - No separate login routes for users and admins.
 ---
 
-3. **User Registration**\
-   **URL :** `/register`\
+### User Registration :
+   **URL :** `users/register`\
    **Method :** `POST`
 
    **Description :** This endpoint is used to register a new user.
@@ -68,8 +69,8 @@ This repository contains API documentation for Hospital-Management-System
      - Description: Indicates that an error occurred during the registration process.
 ---
 
-4. **User-Login**\
-   **URL :** `/login`\
+### User-Login
+   **URL :** `users/login`\
    **Method :** `POST`
 
    **Description :** This endpoint is used for user login.
@@ -96,4 +97,33 @@ This repository contains API documentation for Hospital-Management-System
      - Description: Indicates that the provided credentials (email and password) are incorrect.
 ---
 
-5. 
+### Reset-Password :
+  **URL :**  `users/reset`\
+  **Method :** `PATCH`
+
+  **Description :** This endpoint is used to reset password.
+
+  **Parameters**
+   ```
+   {
+    email: String,
+    password: String,
+   }
+   ```
+
+   **Response :**
+   - 200 (OK):
+     - Body: {"msg": "Password Reset Successful"}
+     - Description: Indicates that the password reset was successful.
+
+   - 404 (Not Found):
+     - Body: {"msg": "User not found."}
+     - Description: Indicates that the user with the provided email does not exist.
+
+   - 500 (Internal Server Error):
+     - Body: {"msg": "Internal Server Error"}
+     - Description: Indicates that an internal server error occurred during the password reset process.
+
+---
+
+### 

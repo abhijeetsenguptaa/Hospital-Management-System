@@ -115,21 +115,35 @@ module.exports = {
             const date = req.query.date;
             const purpose = req.query.purpose;
             const status = req.query.status;
-            if (date && purpose && status) {
+            const id = req.query.id;
+            if (id) {
+                const appointmentData = await AppointmentModel.find({ _id: id });
+                res.status(200).send({
+                    status: true,
+                    msg: 'All the appointments as per records.',
+                    data: appointmentData
+                })
+            }
+
+            else if (date && purpose && status) {
                 const appointmentData = await AppointmentModel.find({ date, purpose, status, doctor: user });
                 res.status(200).send({
                     status: true,
                     msg: `Appointment List as on ${date}.`,
                     data: appointmentData
                 })
-            } else if (!date && !purpose && !status) {
+            }
+
+            else if (!date && !purpose && !status) {
                 const appointmentData = await AppointmentModel.find({ $or: [{ doctor: user }, { patient: user }] });
                 res.status(200).send({
                     status: true,
                     msg: `Appointment List`,
                     data: appointmentData
                 })
-            } else {
+            }
+
+            else {
                 let query = {};
                 query.$and = [{ doctor: user }];
 
@@ -151,8 +165,8 @@ module.exports = {
                     msg: 'All the appointments as per records.',
                     data: appointmentData
                 })
-
             }
+            
         } catch {
             res.status(500).send({
                 status: false,

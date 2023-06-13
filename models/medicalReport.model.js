@@ -10,7 +10,7 @@ module.exports = {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users',
         },
-        date: Date,
+        date: String,
         diagnosis: String,
         medications: String,
         testResults: String,
