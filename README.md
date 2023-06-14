@@ -36,24 +36,17 @@ This API uses Role based Authorization.
    **Description :** This endpoint is used to register a new user.
 
    **Parameters**
-   ```
-   {
-    name: String,
-    email: String,
-    password: String,
-    role: {
-        type: String,
-        enum: ['Patient', 'Staff'],
-    },
-    gender: {
-        type: String,
-        enum: ['Male', 'Female', 'Transgender']
-    },
-    dateOfBirth: String,
-    contactInformation: String,
-    address: String,
-   }
-   ```
+   
+   | Field              | Type   | Enum                                                        | Description                                      |
+   |--------------------|--------|-------------------------------------------------------------|--------------------------------------------------|
+   | name               | String |                                                             | The name of the user.                            |
+   | email              | String |                                                             | The email of the user.                           |
+   | password           | String |                                                             | The password of the user.                        |
+   | role               | String | Patient, Staff                                              | The role of the user (Patient or Staff).          |
+   | gender             | String | Male, Female, Transgender                                   | The gender of the user.                          |
+   | dateOfBirth        | String |                                                             | The date of birth of the user.                    |
+   | contactInformation | String |                                                             | The contact information of the user.             |
+   | address            | String |                                                             | The address of the user.                         |
 
    **Response**
    - 409 (Conflict):
@@ -76,12 +69,11 @@ This API uses Role based Authorization.
    **Description :** This endpoint is used for user login.
 
    **Parameters**
-   ```
-   {
-    email: String,
-    password: String,
-   }
-   ```
+
+   | Field    | Type   | Description               |
+   |----------|--------|---------------------------|
+   | email    | String | The email of the user.    |
+   | password | String | The password of the user. |
 
    **Response**
    - 200 (OK):
@@ -104,12 +96,11 @@ This API uses Role based Authorization.
   **Description :** This endpoint is used to reset password.
 
   **Parameters**
-   ```
-   {
-    email: String,
-    password: String,
-   }
-   ```
+
+  | Field    | Type   | Description               |
+  |----------|--------|---------------------------|
+  | email    | String | The email of the user.    |
+  | password | String | The new password of the user. |
 
    **Response :**
    - 200 (OK):
@@ -133,24 +124,14 @@ This API uses Role based Authorization.
   **Description :** This endpoint is used to add extra information for staffs.
 
   **Parameters**
-  ```
-  {
-    specialization: {
-      type: String,
-      enum: ['Cardiology', 'Dermatology', 'Endocrinology', 'Gastroenterology', 'Neurology', 'Oncology', 'Pediatrics', 'Psychiatry', 'Surgery', 'Urology']
-    },
-    position: {
-      type: String,
-      enum: ['Doctor', 'Nurse', 'Receptionist', 'Janitor', 'Pharmacist', 'Lab Technician', 'Administrative Staff', 'IT Support', 'Security Guard']
-    },
-    workingHours: String,
-    salary: Number,
-    department: {
-      type: String,
-      enum: ['Cardiology', 'Dermatology', 'Endocrinology', 'Gastroenterology', 'Neurology', 'Oncology', 'Pediatrics', 'Psychiatry', 'Surgery', 'Urology']
-    }
-  }
-  ```
+
+  | Field         | Type    | Enum                                                                                                    |
+  |---------------|---------|---------------------------------------------------------------------------------------------------------|
+  | specialization| String  | Cardiology, Dermatology, Endocrinology, Gastroenterology, Neurology, Oncology, Pediatrics, Psychiatry,   Surgery, Urology |
+  | position      | String  | Doctor, Nurse, Receptionist, Janitor, Pharmacist, Lab Technician, Administrative Staff, IT Support, Security   Guard |
+  | workingHours  | String  |                                                                                                         |
+  | salary        | Number  |                                                                                                         |
+  | department    | String  | Cardiology, Dermatology, Endocrinology, Gastroenterology, Neurology, Oncology, Pediatrics, Psychiatry,   Surgery, Urology |
 
   **Responses :**
   - 200 (OK)
@@ -202,17 +183,12 @@ This API uses Role based Authorization.
 
   **Parameters**
 
-  ```
-  {
-    date : String,
-    time : String,
-    purpose : String
-    status : {
-      type : String,
-      enum : ["Confirmed","Canceled"]
-    }
-  }
-  ```
+  | Field   | Type   | Enum                     | Description                                        |
+  |---------|--------|--------------------------|----------------------------------------------------|
+  | date    | String |                          | The date of the appointment.                        |
+  | time    | String |                          | The time of the appointment.                        |
+  | purpose | String |                          | The purpose or reason for the appointment.          |
+  | status  | String | Confirmed, Canceled      | The status of the appointment (Confirmed or Canceled). |
 
   **Responses :**
   - 201 (Created):
@@ -309,7 +285,76 @@ This API uses Role based Authorization.
     - Description: Indicates that an error occurred while retrieving user information.
 ---
 
+### Prescribing Medicines
+  **URL :** `/medicines/:id`
+  **Method :** `POST`
+
+  **Description :** This endpoint is used to prescribe medicines and add the treatment for a specific appointment.
+
+  **Parameters :**
+
+  | Field	      | Value	     | Description                                | 
+  |-------------|------------|--------------------------------------------|
+  | id	        | String	   | Appointment ID to prescribe medicines for. | 
+  | date	      | String	   | Date of the prescription.                  | 
+  | diagnosis	  | String	   | Diagnosis of the patient.                  | 
+  | medications	| String	   | Medications prescribed for the patient.    | 
+  | testResults	| String	   | Test results of the patient.               | 
+  | treatment	  | String	   | Treatment plan for the patient.            | 
 
 
+  **Responses :**
+  - 200 (OK)
+    - Body : {"msg" : "Medicines prescribed successfully."}
+    - Description : Indicates that the medicines have been successfully prescribed for the appointment.
+  
+  - 500 (Internal Server Error):
+    - Body : Error in prescribing medicines
+    - Description: Indicates that an error occurred while prescribing the medicines.
+---
 
+### Update Medicines
+  **URL :** `/medicines/:id`
+  **Method :** `PATCH`
 
+  **Description :** This endpoint is used to update the prescription details of a medicine for a specific appointment.
+
+  **Parameters :**
+
+  | Field	                | Value	     | Description                                | 
+  |-----------------------|------------|--------------------------------------------|
+  | id	                  | String	   | Appointment ID to prescribe medicines for. |
+
+  **Responses :**
+  - 200 (OK):
+    - Body: {"msg": "Medicine updated successfully."}
+    - Description: Indicates that the medicine prescription for the appointment was successfully updated.
+
+  - 500 (Internal Server Error):
+    - Body: {"msg": "Error in updating the medicine."}
+    - Description: Indicates that an error occurred while updating the medicine prescription.
+---
+
+### Deleting Medicines
+  **URL :** `/medicines/:id`
+  **Method :** `DELETE`
+
+  **Description :** This endpoint is used to delete a specific medicine from the system.
+
+  **Parameters :**
+
+  | Field	                | Value	     | Description                                | 
+  |-----------------------|------------|--------------------------------------------|
+  | id	                  | String	   | Appointment ID to prescribe medicines for. |
+
+  **Responses :**
+  - 200 (OK):
+    - Body: {"msg": "Medicine deleted successfully."}
+    - Description:  Indicates that the medicine has been successfully deleted from the system.
+
+  - 500 (Internal Server Error):
+    - Body: {"msg": "Error in deleting the medicine."}
+    - Description: Indicates that an error occurred while deleting the medicine prescription.
+---
+
+### 
