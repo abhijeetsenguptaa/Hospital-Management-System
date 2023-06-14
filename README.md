@@ -174,9 +174,9 @@ This API uses Role based Authorization.
   |----------------|--------|----------------------------------------------------------------------------|
   | id             | String | (Optional) User ID to filter users by a specific ID.                       |
   | role           | String | (Optional) User role to filter users by a specific role.                   |
-  | specialization | String | (Optional) User role to filter users by a specific specialization.         |
-  | position       | String | (Optional) User role to filter users by a specific position.               |
-  | gender         | String | (Optional) User role to filter users by a specific gender.                 |
+  | specialization | String | (Optional) User specialization to filter users by a specific specialization.         |
+  | position       | String | (Optional) User position to filter users by a specific position.               |
+  | gender         | String | (Optional) User gender to filter users by a specific gender.                 |
   
 
   **Response :**
@@ -185,6 +185,9 @@ This API uses Role based Authorization.
       - If no query parameters are provided, it returns information for all users.
       - If the `id` parameter is provided, it returns information for the user with the specified ID.
       - If the `role` parameter is provided, it returns information for users with the specified role.
+      - If the `specialization` parameter is provided, it returns information for users with the specified specialization.
+      - If the `position` parameter is provided, it returns information for users with the specified position.
+      - If the `gender` parameter is provided, it returns information for users with the specified gender.
 
   - 500 (Internal Server Error):
     - Body: `{"msg": "Error in retrieving user(s) information."}`
