@@ -170,13 +170,13 @@ This API uses Role based Authorization.
 
   **Parameters**
   ```
-  | Field | Value  | Description                                            |
-  |-------|--------|--------------------------------------------------------|
-  | id    | String | (Optional) User ID to filter users by a specific ID.   |
-  | role  | String | (Optional) User role to filter users by a specific role.|
-  | specialization | String | (Optional) User role to filter users by a specific specialization.|
-  | position | String | (Optional) User role to filter users by a specific position.|
-  | gender | String | (Optional) User role to filter users by a specific gender.|
+  | Field          | Value  | Description                                                                |
+  |----------------|--------|----------------------------------------------------------------------------|
+  | id             | String | (Optional) User ID to filter users by a specific ID.                       |
+  | role           | String | (Optional) User role to filter users by a specific role.                   |
+  | specialization | String | (Optional) User role to filter users by a specific specialization.         |
+  | position       | String | (Optional) User role to filter users by a specific position.               |
+  | gender         | String | (Optional) User role to filter users by a specific gender.                 |
   ```
 
   **Response :**
