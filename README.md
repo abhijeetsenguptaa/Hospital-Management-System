@@ -5,7 +5,7 @@ This repository contains API documentation for Hospital-Management-System
    ```
    {
     live : ,
-    localCheck : http://localhost:8080/
+    localCheck : http://localhost:8080
    }
    ```
 
@@ -30,7 +30,7 @@ This API uses Role based Authorization.
 ---
 
 ### User Registration :
-   **URL :** `users/register`\
+   **URL :** `/users/register`\
    **Method :** `POST`
 
    **Description :** This endpoint is used to register a new user.
@@ -70,7 +70,7 @@ This API uses Role based Authorization.
 ---
 
 ### User-Login
-   **URL :** `users/login`\
+   **URL :** `/users/login`\
    **Method :** `POST`
 
    **Description :** This endpoint is used for user login.
@@ -98,7 +98,7 @@ This API uses Role based Authorization.
 ---
 
 ### Reset-Password :
-  **URL :**  `users/reset`\
+  **URL :**  `/users/reset`\
   **Method :** `PATCH`
 
   **Description :** This endpoint is used to reset password.
@@ -126,4 +126,67 @@ This API uses Role based Authorization.
 
 ---
 
-### 
+### Adding-Extra-Details :
+  **URL :** `/users/extra`\
+  **Method :** `PATCH`
+
+  **Description :** This endpoint is used to add extra information for staffs.
+
+  **Parameters**
+  ```
+  {
+    specialization: {
+      type: String,
+      enum: ['Cardiology', 'Dermatology', 'Endocrinology', 'Gastroenterology', 'Neurology', 'Oncology', 'Pediatrics', 'Psychiatry', 'Surgery', 'Urology']
+    },
+    position: {
+      type: String,
+      enum: ['Doctor', 'Nurse', 'Receptionist', 'Janitor', 'Pharmacist', 'Lab Technician', 'Administrative Staff', 'IT Support', 'Security Guard']
+    },
+    workingHours: String,
+    salary: Number,
+    department: {
+      type: String,
+      enum: ['Cardiology', 'Dermatology', 'Endocrinology', 'Gastroenterology', 'Neurology', 'Oncology', 'Pediatrics', 'Psychiatry', 'Surgery', 'Urology']
+    }
+  }
+  ```
+
+  **Responses :**
+  - 200 (OK)
+    - Body : {"msg" : "All the information have been saved."}
+    - Description : Indicates that the extra data has been successfully added.
+
+  - 500 (Internal Server Error)
+    - Body : {"msg" : "Error in adding the information."}
+    - Description : Indicates that the data could not be added to the information of the user.
+---
+
+### Fetching Users : 
+  **URL :** `/users/`
+  **Method :** `GET`
+
+  **Description :** This endpoint is used to retrieve user information. It can return information for all users or filter users based on specific queries.
+
+  **Parameters**
+  ```
+  | Field | Value  | Description                                            |
+  |-------|--------|--------------------------------------------------------|
+  | id    | String | (Optional) User ID to filter users by a specific ID.   |
+  | role  | String | (Optional) User role to filter users by a specific role.|
+  | specialization | String | (Optional) User role to filter users by a specific specialization.|
+  | position | String | (Optional) User role to filter users by a specific position.|
+  | gender | String | (Optional) User role to filter users by a specific gender.|
+  ```
+
+  **Response :**
+  - 200 (OK):
+    - Body: JSON array of user objects
+      - If no query parameters are provided, it returns information for all users.
+      - If the `id` parameter is provided, it returns information for the user with the specified ID.
+      - If the `role` parameter is provided, it returns information for users with the specified role.
+
+  - 500 (Internal Server Error):
+    - Body: `{"msg": "Error in retrieving user(s) information."}`
+    - Description: Indicates that an error occurred while retrieving user information.
+
