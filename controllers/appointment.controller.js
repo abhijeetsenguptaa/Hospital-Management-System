@@ -13,7 +13,7 @@ module.exports = {
             if (checkAppointment.length == 0) {
                 const bookAppointment = new AppointmentModel({ patient: user, doctor: id, date, time, purpose, status });
                 await bookAppointment.save();
-                res.status(200).send({
+                res.status(201).send({
                     status: true,
                     msg: `Successfully Booked your Appointment with Dr.${whoSDoctor[0].name}.`
                 })
@@ -28,7 +28,7 @@ module.exports = {
                 if (flag) {
                     const bookAppointment = new AppointmentModel({ patient: user, doctor: id, date, time, purpose, status });
                     await bookAppointment.save();
-                    res.status(200).send({
+                    res.status(201).send({
                         status: true,
                         msg: `Successfully Booked your Appointment with Dr.${whoSDoctor[0].name}.`
                     })
@@ -76,7 +76,7 @@ module.exports = {
                         msg: "Successfully Updated!"
                     })
                 } else {
-                    res.status(403).send({
+                    res.status(409).send({
                         status: false,
                         msg: "Doctor is Busy..Choose a different Slot."
                     })

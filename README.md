@@ -56,7 +56,7 @@ This API uses Role based Authorization.
    ```
 
    **Response**
-   - 201 (Conflict):
+   - 409 (Conflict):
      - Body: {"msg":"User's email-id already exists."}
      - Description: Indicates that the provided email address already exists in the system, and registration     cannot  proceed.
 
@@ -192,4 +192,124 @@ This API uses Role based Authorization.
   - 500 (Internal Server Error):
     - Body: `{"msg": "Error in retrieving user(s) information."}`
     - Description: Indicates that an error occurred while retrieving user information.
+---
+
+### Booking-Appointment
+  **URL :** `/appointments/:id`
+  **Method :** `POST`
+
+  **Description :** This endpoint is used to book an appointment with a specific user identified by the id parameter.
+
+  **Parameters**
+
+  ```
+  {
+    date : String,
+    time : String,
+    purpose : String
+    status : {
+      type : String,
+      enum : ["Confirmed","Canceled"]
+    }
+  }
+  ```
+
+  **Responses :**
+  - 201 (Created):
+    - Body: {"msg": "Appointment booked successfully."}
+    - Description: Indicates that the appointment was booked successfully.
+
+  - 409 (Conflict):
+    - Body: {"msg": "Slot is already booked."}
+    - Description: Indicates that the specified slot is already booked and cannot be reserved.
+
+
+  - 500 (Internal Server Error):
+    - Body: {"msg": "Error in booking the appointment."}
+    - Description: Indicates that an error occurred while booking the appointment.
+---
+
+### Update Appointment
+  **URL :** `/appointments/update/:id`
+  **Method :** `PATCH`
+
+  **Description :** This endpoint is used to update the date, time, or status of an appointment with the specified id parameter.
+
+  **Parameters**
+  | Field | Value | Description |
+  |-------|-------|-------------|
+  | id	| String	| Appointment ID to identify the appointment. |
+  | date	| Date	| (Optional) Updated date of the appointment. |
+  | time	| String	| (Optional) Updated time of the appointment. |
+  | status	| String	| (Optional) Updated status of the appointment. |
+
+  **Responses :**
+  - 200 (OK):
+    - Body: {"msg": "Appointment updated successfully."}
+    - Description: Indicates that the appointment was updated successfully.
+
+  - 409 (Conflict):
+    - Body: {"msg": "Slot is already booked."}
+    - Description: Indicates that the specified slot is already booked and cannot be updated.
+
+  - 500 (Internal Server Error):
+    - Body: {"msg": "Error in updating the appointment."}
+    - Description: Indicates that an error occurred while updating the appointment.
+---
+
+### Delete Appointment
+  **URL :** `/appointments/:id`
+  **Method :** `DELETE`
+  
+  **Description :**This endpoint is used to delete an appointment with the specified `id` parameter.
+
+  **Parameters**
+  
+  | Field | Value  | Description                               |
+  |-------|--------|-------------------------------------------|
+  | id    | String | Appointment ID to identify the appointment.|
+
+  **Responses :**
+
+  - 200 (OK):
+    - Body: `{"msg": "Appointment deleted successfully."}`
+    - Description: Indicates that the appointment was deleted successfully.
+
+  - 500 (Internal Server Error):
+    - Body: `{"msg": "Error in deleting the appointment."}`
+    - Description: Indicates that an error occurred while deleting the appointment.
+---
+
+### Get Appointment
+  **URL :** `/appointments/`
+  **Method :** `GET`
+
+  **Description :**This endpoint is used to retrieve appointments. It can return information for all users or filter users based on specific queries.
+
+  **Parameters**
+
+  | Field	  | Value	  | Description                                               |
+  |---------|---------|-----------------------------------------------------------|
+  | date	  | String	| (Optional) Date of the appointment.                       |
+  | purpose | String	| (Optional) Purpose of the appointment.                    |
+  | status  | String	| (Optional) Status of the appointment.                     |
+  | id      | String	| (Optional) Appointment ID to fetch a specific appointment.|
+
+  **Responses :**
+  - 200 (OK):
+    - Body: JSON array of appointment objects
+      - If no query parameters are provided, it returns information for all appointments.
+      - If the `id` parameter is provided, it returns information for the appointment with the specified ID.
+      - If the `date` parameter is provided, it returns information for the appointments with the specified date.
+      - If the `status` parameter is provided, it returns information for the appointments with the specified status.
+      - If the `purpose` parameter is provided, it returns information for the appointments with the specified purpose.
+  
+  - 500 (Internal Server Error):
+    - Body: `{"msg": "Error in fetching the details of the Appointment"}`
+    - Description: Indicates that an error occurred while retrieving user information.
+---
+
+
+
+
 
