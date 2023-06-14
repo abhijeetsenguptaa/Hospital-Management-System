@@ -169,7 +169,7 @@ This API uses Role based Authorization.
   **Description :** This endpoint is used to retrieve user information. It can return information for all users or filter users based on specific queries.
 
   **Parameters**
-  ```
+  
   | Field          | Value  | Description                                                                |
   |----------------|--------|----------------------------------------------------------------------------|
   | id             | String | (Optional) User ID to filter users by a specific ID.                       |
@@ -177,7 +177,7 @@ This API uses Role based Authorization.
   | specialization | String | (Optional) User role to filter users by a specific specialization.         |
   | position       | String | (Optional) User role to filter users by a specific position.               |
   | gender         | String | (Optional) User role to filter users by a specific gender.                 |
-  ```
+  
 
   **Response :**
   - 200 (OK):
