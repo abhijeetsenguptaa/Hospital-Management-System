@@ -10,6 +10,10 @@ module.exports = {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users',
         },
+        appointment: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'appointments',
+        },
         date: String,
         diagnosis: String,
         medications: String,

@@ -4,6 +4,7 @@ const cors = require('cors');
 const connection = require('./configs/connection');
 const { userRoute } = require('./routers/user.route');
 const { appointmentRoute } = require('./routers/appointment.route');
+const { medicalRoute } = require('./routers/medicalReports.route');
 
 
 const PORT = process.env.port || 8080;
@@ -28,7 +29,7 @@ app.get('/', async (req, res) => {
 
 app.use('/users', userRoute);
 app.use('/appointments', appointmentRoute);
-
+app.use('/medicines', medicalRoute);
 
 app.listen(PORT, async () => {
     try {

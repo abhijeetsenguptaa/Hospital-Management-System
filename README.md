@@ -323,7 +323,7 @@ This API uses Role based Authorization.
 
   | Field	                | Value	     | Description                                | 
   |-----------------------|------------|--------------------------------------------|
-  | id	                  | String	   | Appointment ID to prescribe medicines for. |
+  | id	                  | String	   | Medical Report ID to prescribe medicines for. |
 
   **Responses :**
   - 200 (OK):
@@ -345,7 +345,7 @@ This API uses Role based Authorization.
 
   | Field	                | Value	     | Description                                | 
   |-----------------------|------------|--------------------------------------------|
-  | id	                  | String	   | Appointment ID to prescribe medicines for. |
+  | id	                  | String	   | Medical Report ID to prescribe medicines for. |
 
   **Responses :**
   - 200 (OK):
@@ -357,4 +357,37 @@ This API uses Role based Authorization.
     - Description: Indicates that an error occurred while deleting the medicine prescription.
 ---
 
-### 
+### Fetching Medicinal Reports
+  **URL :** `/medicines/`
+  **Method :** `GET`
+
+  **Description :** This endpoint is used to get all the  medical reports from the system or can also filter out by using id or date as query.
+
+  **Parameters :**
+
+  | Field	                | Value	     | Description                                | 
+  |-----------------------|------------|--------------------------------------------|
+  | id	                  | String	   | Medical Report ID to get medicines for.    |
+  | date                  | String     | Medical Report Date to get medicines for.  |
+
+  **Responses :**
+  - 200 (OK):
+    - Body: {"msg": "Medicine retrieved successfully."}
+    - Description: Indicates that the medicine prescription has been successfully retrieved from the system.
+
+  - 500 (Internal Server Error):
+    - Body: {"msg": "Error in retrieving the medicine."}
+    - Description: Indicates that an error occurred while retrieving the medicine prescription.
+
+  **For a query with ID and date:**
+  - 200 (OK):
+    - Body: {"msg": "Medicine found."}
+    - Description: Indicates that the medicine prescription with the specified ID and date was found in the system.
+
+  - 404 (Not Found):
+    - Body: {"msg": "Medicine not found."}
+    - Description: Indicates that the medicine prescription with the specified ID and date was not found in the system.
+
+  - 500 (Internal Server Error):
+    - Body: {"msg": "Error in querying the medicine."}
+    - Description: Indicates that an error occurred while querying the medicine prescription based on ID and date.
