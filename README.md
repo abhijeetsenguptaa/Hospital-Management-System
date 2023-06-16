@@ -4,7 +4,7 @@ This repository contains API documentation for Hospital-Management-System
 ### Overview Basic API endpoint Deployed
    ```
    {
-    live : ,
+    live : https://hosiptal-management-system.onrender.com,
     localCheck : http://localhost:8080
    }
    ```

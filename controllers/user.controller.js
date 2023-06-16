@@ -2,8 +2,6 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { UserModel } = require('../models/user.model');
-const { query } = require('express');
-
 
 
 module.exports = {
@@ -135,7 +133,8 @@ module.exports = {
             const role = req.query.role;
             const id = req.query.id;
             if (id) {
-                const doctors = await UserModel.find({ _id: id });
+                const user = await UserModel.find({ _id: id });
+                const doctors = await UserModel.aggregate([{ $match: { _id: user[0]._id } }, { $lookup: { from: "reports", localField: "_id", foreignField: "patient", as: "medicalHistory" } }])
                 res.status(200).send({
                     status: true,
                     data: doctors
@@ -149,7 +148,7 @@ module.exports = {
                 })
             }
             else if (!specialization && !gender && !position && !role) {
-                const allMembers = await UserModel.find();
+                const allMembers = await UserModel.aggregate([{ $lookup: { from: 'reports', localField: '_id', foreignField: 'patient', as: 'medicalHistory' } }])
                 res.status(200).send({
                     status: true,
                     data: allMembers
